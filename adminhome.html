@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+
+    <title>Admin</title>
+</head>
+
+<body>
+
+    <!-- Admin Info -->
+    <div>
+        <p>Welcome</p>
+        <h1 id="adminName"></h1>
+        <h2 id="adminId"></h2>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="admin-nav">
+        <div onclick="showSection('dashboard')">📊 Dashboard</div>
+        <div onclick="showSection('add_stud')">🧑‍🎓 Add Student</div>
+        <div onclick="showSection('add_teach')">🧑‍🏫 Add Faculty</div>
+        <div onclick="showSection('edit_stud')">✏️ Edit Student</div>
+        <div onclick="showSection('edit_teach')">✏️ Edit Faculty</div>
+        <div onclick="showSection('profile')">👤 Profile</div>
+        <div onclick="logout()">🚪 Logout</div>
+    </nav>
+
+    <!-- Sections -->
+
+    <div id="dashboard" class="section active">
+        <h2>Dashboard</h2>
+        <p>Welcome to Admin Panel</p>
+    </div>
+    <!-- For adding stud-->
+    <div id="add_stud" class="section">
+        <h2>Add Student:</h2>
+        <label>Register No.:</label>
+        <input type="varchar" id="reg_no" placeholder="Register No." required>
+        <label>Name:</label>
+        <input type="text" id="studName" placeholder="Name" required>
+        <label>Age:</label>
+        <input type="number" id="studAge" placeholder="Age" required>
+        <label>Course:</label>
+        <input type="text" id="studCourse" placeholder="Course" required>
+        <label>Year:</label>
+        <input type="number" id="studYear" placeholder="Year (1-4)" required>
+        <label>Semester:</label>
+        <input type="number" id="studSemester" placeholder="Semester (1-8)" required>
+        <label>Date of Birth:</label>
+        <input type="date" id="DOB" placeholder="Date of Birth" required>
+        <label>Mother's Name:</label>
+        <input type="text" id="studMother" placeholder="Mother's Name" required>
+        <label>Father's Name:</label>
+        <input type="text" id="studFather" placeholder="Father's Name" required>
+        <label>Parent's Number:</label>
+        <input type="number" id="parentno." placeholder="Parent's Mobile Number" required>
+        <select id="hostler" required>
+            <option value="" disabled selected>Is Hostler?</option>
+            <option value="true">True (Hostler)</option>
+            <option value="false">False (Day Scholar)</option>
+        </select> <select id="clgTransport" required>
+            <option value="" disabled selected>Is using College Transport?</option>
+            <option value="true">True </option>
+            <option value="false">False</option>
+        </select>
+        <label>Enter Password:</label>
+        <input type="password" id="spassword" placeholder="Enter Password" required>
+        <button onclick="addStudent()">Add Student</button>
+    </div>
+
+    <!--To add teachers-->
+
+    <div id="add_teach" class="section">
+        <h2>Add Faculty</h2>
+        <label>Staff ID:</label>
+        <input type="varchar" id="staff_id" placeholder="Staff ID" required>
+        <label>Enter Name:</label>
+        <input type="text" id="teachName" placeholder="Name" required>
+        <label>Enter Department:</label>
+        <input type="text" id="teachDept" placeholder="Department" required>
+        <label>Enter Subject:</label>
+        <input type="subject" id="teachsub" placeholder="Subject" required>
+        <label>Enter Password:</label>
+        <input type="password" id="fpassword" placeholder="Enter Password" required>
+        <label>Enter Qualification:</label>
+        <input type="text" id="qualification" placeholder="Enter the qualification" required>
+        <label>Enter Email:</label>
+        <input type="email" id="teachEmail" placeholder="Enter Email" required>
+        <label>Enter Phone number:</label>
+        <input type="number" id="teachNumb" placeholder="Enter Phone number" required>
+        <label>Enter date of birth:</label>
+        <input type="date" id="teachDOB" placeholder="Enter date of birth" required>
+        <label>Enter Address:</label>
+        <input type="text" id="teachAddress" placeholder="Enter Address" required>
+        <label>Enter Joining date:</label>
+        <input type="date" id="teachjoindate" placeholder="Enter joining date" required>
+        <button onclick="addFaculty()">Add Faculty</button>
+
+    </div>
+
+    <div id="edit_stud" class="section">
+        <h2>Edit Student</h2>
+        <div class="search-box">
+            <input type="text" id="searchStudInput" placeholder="Search by Name, Reg No, or Dept..."
+                onkeyup="searchStudent()">
+        </div>
+
+        <div id="studentsListContainer" style="margin-top: 20px;"></div>
+
+        <div id="editStudForm"
+            style="display: none; margin-top: 20px; flex-direction: column; gap: 10px; max-width: 400px; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+            <h3>Update Student Details:</h3>
+            <input type="text" id="editStudName" placeholder="Name">
+            <input type="text" id="editStudCourse" placeholder="Department">
+            <input type="number" id="editStudYear" placeholder="Year (1-4)">
+            <input type="number" id="editStudSemester" placeholder="Semester (1-8)">
+            <label>Date of Birth:</label>
+            <input type="date" id="editStudDOB">
+            <input type="text" id="editStudMother" placeholder="Mother's Name">
+            <input type="text" id="editStudFather" placeholder="Father's Name">
+            <input type="number" id="editStudParentMobile" placeholder="Parent's Mobile">
+            <label>Is Hostler?</label>
+            <select id="editStudHostler">
+                <option value="true">True (Hostler)</option>
+                <option value="false">False (Day Scholar)</option>
+            </select>
+            <label>Using Transport?</label>
+            <select id="editStudTransport">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+            <input type="text" id="editStudPassword" placeholder="Password">
+            <button onclick="updateStudent()">💾 Save Changes</button>
+            <button onclick="closeForms()" style="background:gray; color:white;">✖️ Cancel</button>
+            <button onclick="deleteUser('students', 'reg_no', 'searchStudId')" style="background:red; color:white;">🗑️
+                Delete Student</button>
+        </div>
+    </div>
+    <div id="edit_teach" class="section">
+        <h2>Edit Faculty</h2>
+        <div class="search-box">
+            <input type="text" id="searchTeachInput" placeholder="Search by Name, ID, or Dept..."
+                onkeyup="searchFaculty()">
+        </div>
+
+        <div id="facultyListContainer" style="margin-top: 20px;"></div>
+
+        <div id="editTeachForm"
+            style="display: none; margin-top: 20px; flex-direction: column; gap: 10px; max-width: 400px; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+            <h3>Update Faculty Details:</h3>
+            <input type="text" id="editTeachName" placeholder="Name">
+            <input type="text" id="editTeachDept" placeholder="Department">
+            <input type="text" id="editTeachSub" placeholder="Subject">
+            <input type="text" id="editTeachQualification" placeholder="Qualification">
+            <input type="email" id="editTeachEmail" placeholder="Email">
+            <input type="number" id="editTeachPhone" placeholder="Phone Number">
+            <label>Date of Birth:</label>
+            <input type="date" id="editTeachDOB">
+            <input type="text" id="editTeachAddress" placeholder="Address">
+            <label>Joining Date:</label>
+            <input type="date" id="editTeachJoinDate">
+            <input type="text" id="editTeachPassword" placeholder="Password">
+            <button onclick="updateFaculty()">💾 Save Changes</button>
+            <button onclick="closeForms()" style="background:gray; color:white;">✖️ Cancel</button>
+            <button onclick="deleteUser('faculty', 'staff_id', 'searchTeachId')"
+                style="background:red; color:white;">🗑️ Delete Faculty</button>
+        </div>
+    </div>
+    <div id="profile" class="section">
+        <h2>Admin Profile</h2>
+        <div id="profileContainer"
+            style="max-width: 450px; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; border: 1px solid #eaeaea;">
+            <p>⏳ Loading profile details...</p>
+        </div>
+    </div>
+
+
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>

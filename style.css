@@ -1,0 +1,292 @@
+:root {
+    --primary-color: #003366;    
+    --secondary-color: #f4b400;  
+    --bg-color: #f0f2f5;
+    --text-color: #333;
+    --white: #ffffff;
+    --error-red: #d93025;
+    --success-green: #188038;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #003366 0%, #0055a4 100%);
+}
+
+.main-title {
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.container > p {
+    color: #cbd5e0;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.login-card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.login-card h1 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+#adminloginToggle, #teacherloginToggle, #studentloginToggle {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    background: #e2e8f0;
+}
+
+#adminloginToggle:hover, #teacherloginToggle:hover, #studentloginToggle:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.form-wrapper { margin-top: 30px; }
+form { display: flex; flex-direction: column; gap: 15px; }
+form h2 { font-size: 1.2rem; margin-bottom: 10px; }
+
+input, select {
+    padding: 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1rem;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0,51,102,0.1);
+}
+
+.password-box { position: relative; display: flex; align-items: center; }
+.password-box input { width: 100%; }
+.password-box i { position: absolute; right: 15px; cursor: pointer; color: #718096; }
+
+.action-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.action-btn:hover { background-color: #002244; }
+
+#hintToggle {
+    margin-top: 20px;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.hint {
+    background: #fff9e6;
+    border: 1px solid #ffeeba;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+
+.admin-nav {
+    display: flex;
+    justify-content: center;
+    background: var(--primary-color);
+    padding: 10px;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.admin-nav div {
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-size: 0.95rem;
+}
+
+.admin-nav div:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.section {
+    display: none;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.section.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--secondary-color);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+
+#add_stud, #add_teach {
+    display: none; 
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+#add_stud.active, #add_teach.active { display: grid; }
+
+label { font-weight: 600; margin-bottom: 5px; display: block; grid-column: span 2; }
+
+#add_stud input, #add_teach input, #add_stud select, #add_teach select { grid-column: span 1; }
+
+#add_stud button, #add_teach button {
+    grid-column: span 2;
+    padding: 15px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 10px;
+    text-align: center;
+}
+
+.data-table th {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.data-table input {
+    width: 70px;
+    padding: 6px;
+    text-align: center;
+    margin: 0;
+}
+
+.save-btn {
+    background: var(--success-green);
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.save-btn:hover { background: #12662a; }
+
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eaeaea;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.stat-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.stat-title { margin: 0; color: #777; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-value { font-size: 1.8rem; font-weight: bold; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--primary-color);}
+
+
+@media (max-width: 600px) {
+    #add_stud, #add_teach { grid-template-columns: 1fr; }
+    #add_stud input, #add_teach input, #add_stud button, #add_teach button { grid-column: span 1; }
+    .data-table { display: block; overflow-x: auto; white-space: nowrap; }
+}

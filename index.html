@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="main-title">
+            <span>VELS Institution Of Science, Technology & Advanced Studies</span>
+        </h1>
+        <p>Deemed to the University Estd. u/s 3 of the UGC Act, 1956</p>
+
+
+
+        <div class="login-card" id="loginCard">
+            <h1>Login user</h1>
+
+            <button id="adminloginToggle">Admin Login</button>
+            <button id="teacherloginToggle">Faculty Login</button>
+            <button id="studentloginToggle">Student Login</button>
+
+            <div class="form-wrapper">
+
+
+                <!-- admin login -->
+                <form onsubmit="loginUser(event, 'admin')" style="display:flex;">
+                    <h2>Admin Login</h2>
+                    <input type="text" name="adminusername" id="adminuserId" placeholder="User ID" required>
+                    <div class="password-box">
+                        <input type="password" id="adminpassword" placeholder="Password" required>
+                        <i class="fa-solid fa-eye" id="atogglePassword"></i>
+                    </div>
+                    <p id="aerrorMsg" style="color:red;"></p>
+                    <button type="submit" id="aloginBtn" class="action-btn">Log in</button>
+                </form>
+
+
+                <!-- Teacher login -->
+                <form onsubmit="loginUser(event, 'faculty')" style="display: none;">
+                    <h2>Faculty Login</h2>
+                    <input type="text" name="facultyusername" id="facultyuserId" placeholder="User ID" required>
+                    <div class="password-box">
+                        <input type="password" id="facultypassword" placeholder="Password" required>
+                        <i class="fa-solid fa-eye" id="ftogglePassword"></i>
+                    </div>
+                    <p id="ferrorMsg" style="color:red;"></p>
+                    <button type="submit" id="floginBtn" class="action-btn">Log in</button>
+                </form>
+
+
+                <!-- student login -->
+                <form onsubmit="loginUser(event, 'student')" style="display:none;">
+                    <h2>Student Login</h2>
+                    <input type="text" name="studentusername" id="studentuserId" placeholder="User ID" required>
+                    <div class="password-box">
+                        <input type="password" id="studentpassword" placeholder="Password" required>
+                        <i class="fa-solid fa-eye" id="stogglePassword"></i>
+                    </div>
+                    <p id="serrorMsg" style="color:red;"></p>
+
+                    <button type="submit" id="sloginBtn" class="action-btn">Log in</button>
+
+                </form>
+
+                <!-- Hint Button -->
+                <button id="hintToggle">Show Login Hints</button>
+
+                <!-- Hint Box -->
+                <div class="hint" id="hintBox" style="display: none;">
+                    <h3>🔐 Login Credentials</h3>
+
+                    <p><strong>Admin:</strong></p>
+                    <p>ID: ADMIN001 / Password: Admin01</p>
+                    <p>ID: ADMIN002 / Password: Admin02</p>
+
+                    <hr>
+
+                    <p><strong>Faculty:</strong></p>
+                    <p>CSE → CSESTAFF001 / cs_staff</p>
+                    <p>ECE → ECSTAFF001 / ec_staff</p>
+                    <p>MECH → MESTAFF001 / me_staff</p>
+                    <p>CIVIL → CESTAFF001 / ce_staff</p>
+                    <p>IT → ITSTAFF001 / it_staff</p>
+
+                    <hr>
+
+                    <p><strong>Students:</strong></p>
+                    <p>Example: CS2023001-10 / cs123</p>
+                    <p>Example: EC2023001-10/ ec123</p>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+<script src="login.js"></script>
+
+</html>

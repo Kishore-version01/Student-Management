@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .data-table td { font-size: 1.05rem; }
+        .grade-badge { padding: 4px 10px; border-radius: 20px; font-weight: bold; color: white; }
+    </style>
+</head>
+<body>
+
+    <nav class="admin-nav">
+        <div onclick="showSection('dashboard')">📊 Dashboard</div>
+        <div onclick="showSection('my_marks')">📝 My Marks</div>
+        <div onclick="showSection('my_attendance')">📅 My Attendance</div>
+        <div onclick="showSection('profile')">👤 My Profile</div>
+        <div onclick="logout()">🚪 Logout</div>
+    </nav>
+
+    <div id="dashboard" class="section active" style="padding: 20px;">
+        <h2 style="font-size: 2rem; color: #333;">Welcome back, <span id="dashStudentName">Student</span>! 🎓</h2>
+        <p style="color: #666; font-size: 1.1rem; margin-bottom: 20px;">Here is your academic overview.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <h3 class="stat-title">Overall CGPA</h3>
+                <div id="statCGPA" class="stat-value" style="color: #007bff;">Loading...</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <h3 class="stat-title">Overall Attendance</h3>
+                <div id="statAttendance" class="stat-value" style="color: #28a745;">Loading...</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <h3 class="stat-title">Subjects Enrolled</h3>
+                <div id="statSubjects" class="stat-value" style="color: #667eea;">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="my_marks" class="section" style="padding: 20px;">
+        <h2>My Academic Performance</h2>
+        <p style="color: #555; margin-bottom: 15px;">Your officially published grades for the current semester.</p>
+        
+        <table class="data-table" id="marksTable">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Subject</th>
+                    <th>CAT 1</th>
+                    <th>CAT 2</th>
+                    <th>Model</th>
+                    <th>Internal</th>
+                    <th>Practical</th>
+                    <th>End Sem</th>
+                    <th>Total</th>
+                    <th>Grade</th>
+                    <th>GP</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+
+    <div id="my_attendance" class="section" style="padding: 20px;">
+        <h2>My Attendance Record</h2>
+        <p style="color: #555; margin-bottom: 15px;">Ensure you maintain above 75% to be eligible for exams.</p>
+        
+        <table class="data-table" id="attendanceTable">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Subject</th>
+                    <th>Classes Conducted</th>
+                    <th>Classes Attended</th>
+                    <th>Percentage (%)</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+
+    <div id="profile" class="section" style="padding: 20px;">
+        <h2>My Profile</h2>
+        <div id="profileContainer" style="max-width: 500px; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; border: 1px solid #eaeaea;">
+            <p>⏳ Loading profile details...</p>
+        </div>
+    </div>
+
+    <script src="student.js"></script>
+</body>
+</html>

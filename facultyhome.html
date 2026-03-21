@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Portal</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="admin-nav">
+        <div onclick="showSection('dashboard')">📊 Dashboard</div>
+        <div onclick="showSection('marks_entry')">📝 Enter Marks</div>
+        <div onclick="showSection('attendance_entry')">📅 Enter Attendance</div>
+        <div onclick="showSection('profile')">👤 Profile</div>
+        <div onclick="logout()">🚪 Logout</div>
+    </nav>
+
+    <div id="dashboard" class="section active" style="padding: 20px;">
+        <h2 style="font-size: 2rem; color: #333;">Welcome back, Faculty! 👋</h2>
+        <p style="color: #666; font-size: 1.1rem; margin-bottom: 20px;">Here is your class overview and analytics.</p>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 25px;">
+            <div
+                style="flex: 1; min-width: 250px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px; box-shadow: 0 10px 20px rgba(118,75,162,0.2);">
+                <h3 style="margin: 0; font-size: 1.1rem; opacity: 0.9;">Assigned Subject</h3>
+                <div id="dashSubject" style="font-size: 1.8rem; font-weight: bold; margin-top: 5px;">Loading...</div>
+                <div id="dashDept"
+                    style="margin-top: 10px; background: rgba(255,255,255,0.2); display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">
+                    Loading...</div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <h3 class="stat-title">Total Students</h3>
+                <div id="statTotalStudents" class="stat-value" style="color: #333;">0</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <h3 class="stat-title">Class Avg Marks</h3>
+                <div id="statAvgMarks" class="stat-value" style="color: #007bff;">0 / 250</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <h3 class="stat-title">Overall Attendance</h3>
+                <div id="statAvgAttendance" class="stat-value" style="color: #28a745;">0%</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <h3 class="stat-title">Best Performer</h3>
+                <div id="statBestPerformer" class="stat-value" style="color: #ffc107; font-size: 1.4rem;">N/A</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⚠️</div>
+                <h3 class="stat-title">Poor Performers (Fail)</h3>
+                <div id="statPoorPerformers" class="stat-value" style="color: #dc3545;">0</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="marks_entry" class="section" style="padding: 20px;">
+        <h2>Marks Entry Panel</h2>
+        <p style="color: #555; margin-bottom: 15px;">Enter marks for your assigned students below. Grades and CGPA will
+            be calculated automatically upon saving.</p>
+
+        <button class="save-btn" onclick="saveAllMarks()">💾 Save All Marks</button>
+
+        <table class="data-table" id="marksTable">
+            <thead>
+                <tr>
+                    <th>Reg No</th>
+                    <th style="text-align: left;">Student Name</th>
+                    <th>CAT 1 (50)</th>
+                    <th>CAT 2 (50)</th>
+                    <th>Model (100)</th>
+                    <th>Internal (50)</th>
+                    <th>Practical (100)</th>
+                    <th>End Sem (100)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="attendance_entry" class="section" style="padding: 20px;">
+        <h2>Attendance Entry Panel</h2>
+        <p style="color: #555; margin-bottom: 15px;">Update total classes and attended classes. Percentages calculate
+            automatically.</p>
+
+        <button class="save-btn" onclick="saveAllAttendance()">💾 Save All Attendance</button>
+
+        <table class="data-table" id="attendanceTable">
+            <thead>
+                <tr>
+                    <th>Reg No</th>
+                    <th style="text-align: left;">Student Name</th>
+                    <th>Total Classes Conducted</th>
+                    <th>Classes Attended</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="profile" class="section" style="padding: 20px;">
+        <h2>Faculty Profile</h2>
+        <div id="profileContainer"
+            style="max-width: 450px; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; border: 1px solid #eaeaea;">
+            <p>⏳ Loading profile details...</p>
+        </div>
+    </div>
+
+    <script src="faculty.js"></script>
+</body>
+
+</html>
