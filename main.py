@@ -3,12 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client, Client
 from pydantic import BaseModel
 from typing import List
+import os
 
 app = FastAPI()
 
-SUPABASE_URL = "https://dmcsaqcvcpurtbmcegtg.supabase.co"
-SUPABASE_KEY = "sb_publishable_1j1tF-yz6DSBb6Mvj2AH3Q_WBLYdciy"
-
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 app.add_middleware(
