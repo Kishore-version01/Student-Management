@@ -62,3 +62,22 @@ https://student-management-two-woad.vercel.app/
 │   ├── student.js           # Student logic (Read-only data fetching)
 │   └── style.css            # Global stylesheet and design system
 └── README.md
+
+
+LOGIN HINT:
+
+
+| Role     | ID Format     | Default Password |
+|----------|---------------|------------------|
+| ADMIN:   |               |                  |
+| Admin    |  ADMIN001     |    Admin01       |
+| Admin    |  ADMIN002     |    Admin02       |
+| FACULTY: |               |                  |
+| CSE      |  CSESTAFF001  |    cs_staff      |
+| ECE      |  CSTAFF001    |    ec_staff      |
+| MECH     |  MESTAFF001   |    me_staff      |
+| CIVIL    |  CESTAFF001   |    ce_staff      |
+| IT       |  ITSTAFF001   |    it_staff      |
+| STUDENTS:|               |                  |
+| Student  | CS2023001->10 |    cs123         |
+| Student  | EC2023001->10 |    ec123         |
