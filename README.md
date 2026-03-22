@@ -2,6 +2,10 @@
 
 A full-stack, role-based academic portal designed to streamline university operations. This system provides dedicated interfaces for Administrators, Faculty, and Students to manage academic data, track performance, and maintain secure user profiles.
 
+## Live demo
+
+https://student-management-two-woad.vercel.app/
+
 ##  Key Features
 
 ###  Role-Based Access Control
