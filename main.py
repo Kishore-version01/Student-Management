@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client, Client
 from pydantic import BaseModel
 from typing import List
+from fastapi.responses import RedirectResponse
 import os
 
 app = FastAPI()
@@ -105,8 +106,9 @@ class FacultySelfUpdate(BaseModel):
     password: str
 
 @app.get("/")
-def home():
-    return {"message": "Student Management API is running!"}
+async def root():
+    
+    return RedirectResponse(url="https://your-frontend-url.vercel.app/index.html")
 
 @app.post("/login")
 def login(user: LoginRequest):
