@@ -1,6 +1,7 @@
 const studentBtn = document.getElementById("studentloginToggle");
 const teacherBtn = document.getElementById("teacherloginToggle");
 const adminBtn = document.getElementById("adminloginToggle");
+const API_URL = "https://student-management-two-woad.vercel.app";
 
 
 const forms = document.querySelectorAll(".form-wrapper form");
@@ -72,7 +73,7 @@ async function loginUser(event, role) {
     }
     
     try {
-        const res = await fetch("https://student-management-two-woad.vercel.app/login", {
+        const res = await fetch(`${API_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
