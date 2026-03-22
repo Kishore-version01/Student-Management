@@ -62,7 +62,7 @@ https://student-management-two-woad.vercel.app/
 │   ├── student.js           # Student logic (Read-only data fetching)
 │   └── style.css            # Global stylesheet and design system
 └── README.md
-
+```
 
 LOGIN HINT:
 
