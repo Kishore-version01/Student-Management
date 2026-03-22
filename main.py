@@ -104,6 +104,9 @@ class FacultySelfUpdate(BaseModel):
     address: str
     password: str
 
+@app.get("/")
+def home():
+    return {"message": "Student Management API is running!"}
 
 @app.post("/login")
 def login(user: LoginRequest):
