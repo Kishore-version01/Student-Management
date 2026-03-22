@@ -108,7 +108,7 @@ class FacultySelfUpdate(BaseModel):
 @app.get("/")
 async def root():
     
-    return RedirectResponse(url="https://student-management-two-woad.vercel.app/login")
+    return RedirectResponse(url="https://student-management-two-woad.vercel.app/index.html")
 
 @app.post("/login")
 def login(user: LoginRequest):
