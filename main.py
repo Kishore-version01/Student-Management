@@ -107,14 +107,14 @@ class FacultySelfUpdate(BaseModel):
     password: str
 
 api = APIRouter(prefix="/api")
-app.include_router(api)
 
-@app.get("/")
+
+@api.get("/")
 async def root():
     
     return RedirectResponse(url="https://student-management-two-woad.vercel.app/index.html")
 
-@app.post("/login")
+@api.post("/login")
 def login(user: LoginRequest):
     print("\n--- NEW LOGIN ATTEMPT ---")
     
@@ -170,7 +170,7 @@ def login(user: LoginRequest):
         print(f"❌ CRASH ERROR: {e}")
         raise HTTPException(status_code=500, detail="Database Error")
 
-@app.post("/admin/addstud")
+@api.post("/admin/addstud")
 def add_student(student: Student):
     try:
         data = student.model_dump() 
@@ -180,7 +180,7 @@ def add_student(student: Student):
         print(f"SQL Error: {e}")
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.post("/admin/addfaculty")
+@api.post("/admin/addfaculty")
 def add_faculty(faculty: Faculty):
     try:
         data = faculty.model_dump()
@@ -192,7 +192,7 @@ def add_faculty(faculty: Faculty):
 
 
 
-@app.get("/admin/stats")
+@api.get("/admin/stats")
 def get_stats():
     try:
         students = supabase.table("students").select("id", count="exact").execute()
@@ -204,7 +204,7 @@ def get_stats():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/admin/students")
+@api.get("/admin/students")
 def get_all_students():
     try:
         response = supabase.table("students").select("*").execute()
@@ -212,7 +212,7 @@ def get_all_students():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/admin/faculty")
+@api.get("/admin/faculty")
 def get_all_faculty():
     try:
         response = supabase.table("teachers").select("*").execute()
@@ -220,7 +220,7 @@ def get_all_faculty():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/admin/profile/{admin_id}")
+@api.get("/admin/profile/{admin_id}")
 def get_admin_profile(admin_id: str):
     try:
         response = supabase.table("admins").select("*").eq("admin_id", admin_id).execute()
@@ -232,7 +232,7 @@ def get_admin_profile(admin_id: str):
 
 
 
-@app.put("/admin/students/{reg_no}")
+@api.put("/admin/students/{reg_no}")
 def update_student(reg_no: str, student: StudentUpdate):
     try:
         response = supabase.table("students").update(student.model_dump()).eq("register_no", reg_no).execute()
@@ -240,7 +240,7 @@ def update_student(reg_no: str, student: StudentUpdate):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.put("/admin/faculty/{staff_id}")
+@api.put("/admin/faculty/{staff_id}")
 def update_faculty(staff_id: str, faculty: FacultyUpdate):
     try:
         response = supabase.table("teachers").update(faculty.model_dump()).eq("staff_id", staff_id).execute()
@@ -248,7 +248,7 @@ def update_faculty(staff_id: str, faculty: FacultyUpdate):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.delete("/admin/users/{role}/{user_id}")
+@api.delete("/admin/users/{role}/{user_id}")
 def delete_user(role: str, user_id: str):
     try:
         if role == "students":
@@ -277,7 +277,7 @@ def calculate_attendance_pct(attended: int, total: int):
     return round((attended / total) * 100, 2)
 
 
-@app.get("/faculty/students/{department}")
+@api.get("/faculty/students/{department}")
 def get_department_students(department: str):
     try:
         response = supabase.table("students").select("*").eq("department", department).execute()
@@ -285,7 +285,7 @@ def get_department_students(department: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/faculty/marks/{subject}")
+@api.get("/faculty/marks/{subject}")
 def get_subject_marks(subject: str):
     try:
         response = supabase.table("marks").select("*").eq("subject", subject).execute()
@@ -293,7 +293,7 @@ def get_subject_marks(subject: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/faculty/attendance/{subject}")
+@api.get("/faculty/attendance/{subject}")
 def get_subject_attendance(subject: str):
     try:
         response = supabase.table("attendance").select("*").eq("subject", subject).execute()
@@ -301,7 +301,7 @@ def get_subject_attendance(subject: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/faculty/marks/bulk")
+@api.post("/faculty/marks/bulk")
 def upsert_bulk_marks(entries: List[MarkEntry]):
     try:
         data_to_upsert = []
@@ -325,7 +325,7 @@ def upsert_bulk_marks(entries: List[MarkEntry]):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@app.post("/faculty/attendance/bulk")
+@api.post("/faculty/attendance/bulk")
 def upsert_bulk_attendance(entries: List[AttendanceEntry]):
     try:
         data_to_upsert = []
@@ -347,7 +347,7 @@ def upsert_bulk_attendance(entries: List[AttendanceEntry]):
 
 
 
-@app.get("/student/profile/{reg_no}")
+@api.get("/student/profile/{reg_no}")
 def get_student_profile(reg_no: str):
     try:
         response = supabase.table("students").select("*").eq("register_no", reg_no).execute()
@@ -357,7 +357,7 @@ def get_student_profile(reg_no: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/student/marks/{reg_no}")
+@api.get("/student/marks/{reg_no}")
 def get_student_marks(reg_no: str):
     """Fetches all marks for a specific student across all subjects"""
     try:
@@ -366,7 +366,7 @@ def get_student_marks(reg_no: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/student/attendance/{reg_no}")
+@api.get("/student/attendance/{reg_no}")
 def get_student_attendance(reg_no: str):
     try:
         response = supabase.table("attendance").select("*").eq("register_no", reg_no).execute()
@@ -375,7 +375,7 @@ def get_student_attendance(reg_no: str):
         raise HTTPException(status_code=500, detail=str(e))
     
 
-@app.put("/student/profile/{reg_no}")
+@api.put("/student/profile/{reg_no}")
 def update_student_self(reg_no: str, data: StudentSelfUpdate):
     
     try:
@@ -384,7 +384,7 @@ def update_student_self(reg_no: str, data: StudentSelfUpdate):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.put("/faculty/profile/{staff_id}")
+@api.put("/faculty/profile/{staff_id}")
 def update_faculty_self(staff_id: str, data: FacultySelfUpdate):
     
     try:
@@ -392,3 +392,5 @@ def update_faculty_self(staff_id: str, data: FacultySelfUpdate):
         return {"status": "success", "data": response.data}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+app.include_router(api)
