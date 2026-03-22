@@ -107,6 +107,7 @@ class FacultySelfUpdate(BaseModel):
     password: str
 
 api = APIRouter(prefix="/api")
+app.include_router(api)
 
 @app.get("/")
 async def root():
