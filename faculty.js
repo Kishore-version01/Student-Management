@@ -1,5 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
-
+const API_URL = "https://student-management-two-woad.vercel.app/";
 let facultyId = "";
 let facultySubject = "";
 let facultyDepartment = "";
@@ -317,7 +316,7 @@ async function editMyProfile() {
             });
             if (res.ok) {
                 Swal.fire("Updated!", "Your profile has been updated.", "success");
-                fetchFacultyProfile().then(() => renderProfile()); // Refresh UI
+                fetchFacultyProfile().then(() => renderProfile());
             } else {
                 Swal.fire("Error", "Failed to update profile", "error");
             }

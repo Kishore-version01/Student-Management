@@ -1,18 +1,14 @@
-const API_URL = "http://127.0.0.1:8000";
-
+const API_URL = "https://student-management-two-woad.vercel.app/";
 let studentId = "";
 let studentProfile = null;
 let myMarks = [];
 let myAttendance = [];
 
-// ==========================================
-// INITIALIZATION
-// ==========================================
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem("user"));
     
-    // Security check: Kick them out if they aren't logged in as a student
     if (!user || user.role !== 'student') {
         window.location.href = "index.html";
         return;
@@ -20,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     studentId = user.id.trim();
     
-    // Fetch all student data
     fetchAllData();
 });
 
@@ -29,13 +24,11 @@ function showSection(sectionId) {
     document.getElementById(sectionId).classList.add("active");
 }
 
-// ==========================================
-// DATA FETCHING
-// ==========================================
+
 
 async function fetchAllData() {
     try {
-        // Fetch Profile
+      
         const profileRes = await fetch(`${API_URL}/student/profile/${studentId}`);
         if (profileRes.ok) {
             studentProfile = await profileRes.json();
@@ -43,21 +36,21 @@ async function fetchAllData() {
             renderProfile();
         }
 
-        // Fetch Marks
+         
         const marksRes = await fetch(`${API_URL}/student/marks/${studentId}`);
         if (marksRes.ok) {
             myMarks = await marksRes.json();
             renderMarksTable();
         }
 
-        // Fetch Attendance
+      
         const attRes = await fetch(`${API_URL}/student/attendance/${studentId}`);
         if (attRes.ok) {
             myAttendance = await attRes.json();
             renderAttendanceTable();
         }
 
-        // Calculate Dashboard Stats once everything is loaded
+         
         renderDashboardStats();
 
     } catch (e) {
@@ -66,12 +59,9 @@ async function fetchAllData() {
     }
 }
 
-// ==========================================
-// RENDERING UI
-// ==========================================
-
+ 
 function renderDashboardStats() {
-    // 1. Calculate Overall Attendance
+     
     if (myAttendance.length > 0) {
         let totalConducted = 0;
         let totalAttended = 0;
@@ -84,13 +74,13 @@ function renderDashboardStats() {
         const attElement = document.getElementById("statAttendance");
         attElement.textContent = overallPct.toFixed(1) + "%";
         
-        // Color code attendance!
+      
         if (overallPct >= 75) attElement.style.color = "#28a745"; // Green
         else if (overallPct >= 65) attElement.style.color = "#f4b400"; // Yellow
         else attElement.style.color = "#dc3545"; // Red
     }
 
-    // 2. Calculate CGPA (Average of all Grade Points)
+ 
     if (myMarks.length > 0) {
         let totalGPs = 0;
         myMarks.forEach(m => totalGPs += (m.cgpa || 0));
@@ -100,7 +90,7 @@ function renderDashboardStats() {
         document.getElementById("statCGPA").textContent = "N/A";
     }
 
-    // 3. Total Subjects
+ 
     document.getElementById("statSubjects").textContent = Math.max(myMarks.length, myAttendance.length);
 }
 
@@ -114,7 +104,7 @@ function renderMarksTable() {
     }
 
     myMarks.forEach(m => {
-        // Assign beautiful colors to the grades
+         
         let gradeColor = "#007bff"; 
         if (m.grade === "O") gradeColor = "#28a745";
         else if (m.grade === "U") gradeColor = "#dc3545";

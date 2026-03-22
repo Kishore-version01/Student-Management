@@ -261,7 +261,7 @@ def calculate_grade_and_gp(internal: int, practical: int, end_sem: int):
     elif total >= 70: return total, "A", 8.0
     elif total >= 60: return total, "B+", 7.0
     elif total >= 50: return total, "B", 6.0
-    else: return total, "U", 0.0 # U = Fail/Arrear
+    else: return total, "U", 0.0 
 
 def calculate_attendance_pct(attended: int, total: int):
     if total == 0: return 0.0

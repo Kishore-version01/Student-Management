@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://student-management-two-woad.vercel.app/";
 let allStudents = [];
 let allFaculty = [];
 let currentEditingStudentId = null;
@@ -46,7 +46,6 @@ async function loadDashboardStats() {
         const data = await res.json();
         const dash = document.getElementById("dashboard");
 
-        // Get the logged-in user's ID to greet them
         const user = JSON.parse(localStorage.getItem("user"));
         const adminName = user ? user.id : "Admin";
 
@@ -101,7 +100,7 @@ async function addStudent() {
                 timer: 2000,
                 showConfirmButton: false
             });
-            document.querySelectorAll("#add_stud input").forEach(input => input.value = ''); // Clear form
+            document.querySelectorAll("#add_stud input").forEach(input => input.value = ''); 
             showSection('dashboard');
         } else {
             const err = await response.json();
@@ -141,7 +140,7 @@ async function addFaculty() {
                 timer: 2000,
                 showConfirmButton: false
             });
-            document.querySelectorAll("#add_teach input").forEach(input => input.value = ''); // Clear form
+            document.querySelectorAll("#add_teach input").forEach(input => input.value = ''); 
         } else {
             const err = await response.json();
             Swal.fire("Error", err.detail || "Failed to add faculty", "error");
