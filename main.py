@@ -121,6 +121,8 @@ def login(user: LoginRequest):
     clean_id = user.id.strip()
     clean_password = user.password.strip()
     safe_role = user.role.lower().strip()
+    clean_id = user.id.strip().upper()
+
 
     print(f"Role: '{safe_role}'")
     print(f"ID Typed: '{clean_id}'")
