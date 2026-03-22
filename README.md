@@ -39,6 +39,9 @@ A full-stack, role-based academic portal designed to streamline university opera
 **Database:**
 * [Supabase](https://supabase.com/) (PostgreSQL)
 
+**Deployment**
+* [Vercel] (https://vercel.com)
+
 ## 📁 Project Structure
 
 ```text
