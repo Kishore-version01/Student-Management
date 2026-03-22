@@ -1,7 +1,7 @@
 const studentBtn = document.getElementById("studentloginToggle");
 const teacherBtn = document.getElementById("teacherloginToggle");
 const adminBtn = document.getElementById("adminloginToggle");
-const API_URL = "https://student-management-two-woad.vercel.app";
+const API_URL = "https://student-management-two-woad.vercel.app/api";
 
 
 const forms = document.querySelectorAll(".form-wrapper form");

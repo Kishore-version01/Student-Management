@@ -1,4 +1,4 @@
-const API_URL = "https://student-management-two-woad.vercel.app/";
+const API_URL = "https://student-management-two-woad.vercel.app/api";
 let allStudents = [];
 let allFaculty = [];
 let currentEditingStudentId = null;
