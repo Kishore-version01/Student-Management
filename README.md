@@ -63,7 +63,7 @@ https://student-management-two-woad.vercel.app/
 │   └── style.css            # Global stylesheet and design system
 └── README.md
 ```
-
+---
 LOGIN HINT:
 
 
@@ -81,3 +81,5 @@ LOGIN HINT:
 | STUDENTS:|               |                  |
 | Student  | CS2023001->10 |    cs123         |
 | Student  | EC2023001->10 |    ec123         |
+
+---
