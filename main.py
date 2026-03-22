@@ -4,6 +4,7 @@ from supabase import create_client, Client
 from pydantic import BaseModel
 from typing import List
 from fastapi.responses import RedirectResponse
+from fastapi import APIRouter
 import os
 
 app = FastAPI()
@@ -104,6 +105,8 @@ class FacultySelfUpdate(BaseModel):
     phone: str
     address: str
     password: str
+
+api = APIRouter(prefix="/api")
 
 @app.get("/")
 async def root():
